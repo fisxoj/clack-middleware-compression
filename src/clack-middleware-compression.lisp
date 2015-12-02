@@ -16,7 +16,7 @@
 
 (defun calculate-compression (env &key gzip)
   "Chooses a compression scheme based on the Accept-Encoding header and middle capabilities."
-  (when-let ((accept-encoding (gethash "accept-encoding" (getf env :headers))))
+  (when-let ((accept-encoding (gethash "accept-encoding" (getf env :headers) nil)))
     (cond
       ((and gzip (search "gzip" accept-encoding)) :gzip)
       (t nil))))
