@@ -14,14 +14,9 @@
 	  (compress-response response compression)
 	  response)))))
 
-(defun print-hash (hash)
-  (loop for key being the hash-keys of hash
-       do (format t "~&~A: ~a~%" key (gethash key hash)))
-  hash)
-
 (defun calculate-compression (env &key gzip)
   "Chooses a compression scheme based on the Accept-Encoding header and middle capabilities."
-  (when-let ((accept-encoding (print (gethash "accept-encoding" (print-hash (getf env :headers))))))
+  (when-let ((accept-encoding (gethash "accept-encoding" (getf env :headers))))
     (cond
       ((and gzip (search "gzip" accept-encoding)) :gzip)
       (t nil))))

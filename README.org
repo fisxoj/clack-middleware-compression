@@ -1,6 +1,17 @@
 * Clack-Middleware-Compression
 
 ** Usage
+#+begin_src lisp
+(setq app
+      (funcall clack-middleware-compression:*clack-middleware-compression*
+	       (lambda (env)
+		 (declare (ignore env))
+		 (list 200
+		       '(:content-type "text/html")
+		       '("<!doctype html><html><body><h1>Hello</h1></body></html>")))))
+
+(clack:clackup app)
+#+end_src
 Use with clack-based frameworks like lucerne and ningle!
 ** Dependencies
 - salza2 (for the compression)

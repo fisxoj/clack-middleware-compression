@@ -17,7 +17,9 @@
   :author "Matt Novenstern"
   :license "LLGPLv3"
   :depends-on (#:cl-annot
-	       #:alexandria)
+	       #:alexandria
+	       #:salza2
+	       #:babel)
   :components ((:module "src"
                 :components
                 ((:file "clack-middleware-compression"))))
