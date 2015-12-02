@@ -1,0 +1,16 @@
+* Clack-Middleware-Compression
+
+** Usage
+Use with clack-based frameworks like lucerne and ningle!
+** Dependencies
+- salza2 (for the compression)
+- babel (for =string-to-octets=)
+** Installation
+
+** Author
+
++ Matt Novenstern (fisxoj@gmail.com)
+
+** Copyright
+
+Copyright (c) 2015 Matt Novenstern (fisxoj@gmail.com)
