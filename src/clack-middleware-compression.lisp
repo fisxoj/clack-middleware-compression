@@ -28,16 +28,17 @@
 
 (defun vectorfy-response (response)
   "Convert the response into a octet vector for salza"
-  (etypecase response
-    (string (babel:string-to-octets response))
-    ((vector (unsigned-byte 8)) response)
-    (pathname (babel:string-to-octets (uiop:read-file-string response)))))
+  (let ((payload (if (listp response) (car response) response)))
+    (etypecase payload
+      (string (babel:string-to-octets payload))
+      ((vector (unsigned-byte 8)) payload)
+      (pathname (babel:string-to-octets (uiop:read-file-string payload))))))
 
 (defun compress-response (response compression)
   "Takes a clack response list and returns the same response compressed with an appropriate compression method based on configuration and the request headers."
   (let* ((compressor (get-compressor compression))
 	 (compressed-response-data (salza2:compress-data
-				    (vectorfy-response (car (third response))) compressor)))
+				    (vectorfy-response (third (print response))) compressor)))
     ;; Mark response as encoded
     (setf (getf (second response) :content-encoding) (string-downcase compression)
 	  (getf (second response) :content-length) (length compressed-response-data)
